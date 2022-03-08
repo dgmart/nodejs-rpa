@@ -1,9 +1,12 @@
 const http = require('http')
+const CustomersRepository = require('../repository/CustomersRepositoryMemory')
+const CreateCustomerAction = require('../../core/usecase/CreateCustomer')
+const ListAllCustomersAction = require('../../core/usecase/ListAllCustomers')
+const CustomerAdapter = require('../../adapter/CustomerAdapter')
 
-const memoryDb = [
-    { id: 2, name: 'Customer B', email: 'custom@r.b' },
-    { id: 1, name: 'Customer A', email: 'custom@r.a' },
-];
+const customersRepository = new CustomersRepository()
+const listall = new ListAllCustomersAction(customersRepository)
+const create = new CreateCustomerAction(customersRepository)
 
 const server = http.createServer((rq, rp) => {
     console.log(['rq ' + rq.url, 'mtd ' + rq.method])
@@ -12,16 +15,16 @@ const server = http.createServer((rq, rp) => {
     switch (rq.url) {
         case '/customers':
             if ('GET' == rq.method) {
-                rp.end(JSON.stringify(memoryDb))
+                rp.end(JSON.stringify(listall.execute()))
             } else if ('POST' == rq.method) {
                 var body = ''
                 rq.on('data', data => {
                     body += data
                 })
                 rq.on('end', () => {
-                    const customer = JSON.parse(body)
-                    customer.id = memoryDb.length + 1
-                    memoryDb.unshift(customer)
+                    const rawCustomer = JSON.parse(body)
+                    const customer = CustomerAdapter.create(rawCustomer.email, rawCustomer.name)
+                    create.execute(customer)
                     rp.end(JSON.stringify({ status: 'ok' }))
                 })
             }
