@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <title>Customers</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Adding Customer</h1>
+        <form action="#" method="post">
+            <div class="row">
+                <div class="four columns">
+                    <label for="customer_name">Name:</label>
+                    <input type="text" name="customer_name" id="customer_name" class="u-full-width" autofocus>
+                </div>
+                <div class="four columns">
+                    <label for="customer_email">E-mail:</label>
+                    <input type="email" name="customer_email" id="customer_email" class="u-full-width">
+                </div>
+            </div>
+            <input type="submit" value="Save" class="button-primary">
+            <a href="index.html" class="button">Cancelar</a>
+        </form>
+    </div>
+    <script>
+        (function () {
+            const form = document.querySelector('form')
+            const buildJson = () => {
+                const fd = new FormData(form)
+                const body = {
+                    name: fd.get('customer_name'),
+                    email: fd.get('customer_email')
+                }
+                return JSON.stringify(body)
+            }
+            form.addEventListener('submit', e => {
+                e.preventDefault()
+                fetch('http://localhost:3000/customers', { method: 'post', body: buildJson() })
+                    .then(data => data.json())
+                    .then(json => {
+                        window.location = 'index.html'
+                    })
+            })
+        })()
+    </script>
+</body>
+
+</html>

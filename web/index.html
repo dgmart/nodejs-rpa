@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <title>Customers</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Customers List</h1>
+        <a href="add-customer.html" class="button button-primary">Add Customer</a>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                </tr>
+            </thead>
+            <tbody id="customers_container"></tbody>
+        </table>
+    </div>
+    <script>
+        (function () {
+            fetch('http://localhost:3000/customers')
+                .then(data => data.json())
+                .then(json => {
+                    let listHtml = ''
+                    json.forEach(customer => {
+                        listHtml += `<tr>` +
+                            `<td>${customer.id}</td>` +
+                            `<td>${customer.name}</td>` +
+                            `<td>${customer.email}</td>` +
+                            `</tr>`
+                    })
+                    const customersContainer = document.getElementById('customers_container')
+                    customersContainer.innerHTML = listHtml
+                })
+        })()
+    </script>
+</body>
+
+</html>
