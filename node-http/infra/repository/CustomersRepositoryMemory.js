@@ -1,20 +1,20 @@
-const CustomersRepository = require('../../core/repository/CustomersRepository')
+const CustomersRepositoryInterface = require('../../core/repository/CustomersRepositoryInterface')
+const database = require('../database/memory')
 
-class CustomersRepositoryMemory extends CustomersRepository {
-    constructor() {
-        super()
-        this.database = []
+class CustomersRepositoryMemory extends CustomersRepositoryInterface {
+    constructor(logger) {
+        super(logger)
+        this.tableName = 'customers'
     }
 
     listAllCustomers() {
-        return this.database
+        this.logger.debug(database.count(this.tableName) + ' cliente(s) encontrados')
+        return database.findAll(this.tableName)
     }
 
     save(customer) {
-        if (!customer.id) {
-            customer.id = this.database.length + 1
-        }
-        this.database.unshift(customer)
+        customer = database.insert(this.tableName, customer)
+        this.logger.debug('cliente inserido com o ID ' + customer.id)
     }
 }
 

@@ -42,7 +42,7 @@
             }
             form.addEventListener('submit', e => {
                 e.preventDefault()
-                fetch('http://localhost:3000/customers', { method: 'post', body: buildJson() })
+                fetch('http://localhost:3000/customers', { method: 'post', body: buildJson(), headers: new Headers({ 'Content-Type': 'application/json' }) })
                     .then(data => data.json())
                     .then(json => {
                         window.location = 'index.html'

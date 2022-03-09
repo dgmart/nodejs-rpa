@@ -1,0 +1,14 @@
+{
+  "name": "node_http",
+  "version": "0.1.0",
+  "description": "Projeto de estudos de criação de APIs com Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}

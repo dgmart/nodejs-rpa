@@ -1,4 +1,8 @@
-class CustomersRepository {
+class CustomersRepositoryInterface {
+    constructor(logger) {
+        this.logger = logger
+    }
+
     listAllCustomers() {
         throw new Error('Não implementado')
     }
@@ -8,4 +12,4 @@ class CustomersRepository {
     }
 }
 
-module.exports = CustomersRepository
+module.exports = CustomersRepositoryInterface

@@ -1,9 +1,11 @@
 class CreateCustomer {
-    constructor(repository) {
+    constructor(repository, logger) {
         this.repository = repository
+        this.logger = logger
     }
 
     execute(customer) {
+        this.logger.debug('inserindo cliente')
         this.repository.save(customer)
     }
 }

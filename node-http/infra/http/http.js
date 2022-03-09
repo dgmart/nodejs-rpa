@@ -3,14 +3,21 @@ const CustomersRepository = require('../repository/CustomersRepositoryMemory')
 const CreateCustomerAction = require('../../core/usecase/CreateCustomer')
 const ListAllCustomersAction = require('../../core/usecase/ListAllCustomers')
 const CustomerAdapter = require('../../adapter/CustomerAdapter')
+const ConsoleLogger = require('../logger/consoleLogger')
 
-const customersRepository = new CustomersRepository()
-const listall = new ListAllCustomersAction(customersRepository)
-const create = new CreateCustomerAction(customersRepository)
+const logger = new ConsoleLogger()
+const customersRepository = new CustomersRepository(logger)
+const listall = new ListAllCustomersAction(customersRepository, logger)
+const create = new CreateCustomerAction(customersRepository, logger)
 
 const server = http.createServer((rq, rp) => {
-    console.log(['rq ' + rq.url, 'mtd ' + rq.method])
-    rp.setHeader('Access-Control-Allow-Origin', 'http://localhost')
+    rp.setHeader('Access-Control-Allow-Origin', '*')
+    if ('OPTIONS' == rq.method) {
+        rp.setHeader('Access-Control-Allow-Methods', '*')
+        rp.setHeader('Access-Control-Allow-Headers', '*')
+        rp.end()
+        return
+    }
     rp.setHeader('Content-Type', 'application/json')
     switch (rq.url) {
         case '/customers':
@@ -36,5 +43,5 @@ const server = http.createServer((rq, rp) => {
 })
 
 server.listen(3000, '127.0.0.1', () => {
-    console.log('server iniciado')
+    logger.debug('servidor iniciado na porta 3000')
 })
