@@ -32,6 +32,6 @@ app.post('/customers', (rq, rp) => {
     rp.json({ status: 'ok' })
 })
 
-app.listen(3000, () => {
-    logger.debug('servidor iniciado na porta 3000')
+app.listen(3001, () => {
+    logger.debug('servidor iniciado na porta 3001')
 })

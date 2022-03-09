@@ -42,6 +42,6 @@ const server = http.createServer((rq, rp) => {
     }
 })
 
-server.listen(3000, '127.0.0.1', () => {
-    logger.debug('servidor iniciado na porta 3000')
+server.listen(3001, '127.0.0.1', () => {
+    logger.debug('servidor iniciado na porta 3001')
 })

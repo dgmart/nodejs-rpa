@@ -1,0 +1,14 @@
+{
+  "name": "puppeteer_rpa",
+  "version": "0.1.0",
+  "description": "Projeto de estudos de criação de robôs com Puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^13.5.0"
+  }
+}
