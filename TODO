@@ -1,0 +1,13 @@
+Web cobaia:
+    ✔ tela de lista @done(22-03-09 15:55)
+    ✔ tela de formulário @done(22-03-09 15:55)
+        ✔ persistencia na API @done(22-03-09 15:55)
+
+Node http:
+    ✔ servidores com http e express @done(22-03-08 16:55)
+
+Puppeteer:
+    ☐ estudar melhor maneira de capturar o momento que a tela foi carregada completamente
+    
+Geral:
+    ☐ estudar melhor sobre async|await e como aplicar isso nos robôs

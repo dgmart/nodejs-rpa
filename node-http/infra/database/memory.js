@@ -1,3 +1,4 @@
+// TODO: transformar este "banco" em memória para MySQL ou MariaDB
 class Database {
     constructor() {
         this.database = []
